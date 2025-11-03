@@ -1,0 +1,25 @@
+@url = http://localhost:3000
+
+### GET USUARIO ROLES
+GET {{url}}/usuario-roles/usuario/1/roles/3
+
+### crear usuario
+POST {{url}}/usuario
+Content-Type: application/json
+
+{
+    "username": "kevin95",
+    "nombre": "Kevin",
+    "apellido": "Llabot",
+    "password": "Jajaja123!"
+    ,"activo": true
+}
+
+
+
+
+
+
+
+
+
