@@ -1,19 +1,76 @@
 @url = http://localhost:3000
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJrZXZpbmxsYWJvdDVAZ21haWwuY29tIiwiaWF0IjoxNzYyMjI0MDUxLCJleHAiOjE3NjIyMzg0NTF9.1riGojuKPBh9LaQ9J02iAu2JxpBv3GzH-rYcG1mJdAo
 
-### GET USUARIO ROLES
-GET {{url}}/usuario-roles/usuario/1/roles/3
 
-### crear usuario
-POST {{url}}/usuario
+
+### Ping
+GET http://localhost:3000/
+
+### Crear usuario
+POST {{url}}/api/auth/registro
 Content-Type: application/json
 
 {
-    "username": "kevin95",
-    "nombre": "Kevin",
-    "apellido": "Llabot",
-    "password": "Jajaja123!"
-    ,"activo": true
+ "nombre": "Ramon",
+ "email": "ramon@jeje.com",
+ "password": "Soad2222"
 }
+
+### Login
+POST {{url}}/api/auth/login
+Content-Type: application/json
+
+{
+
+ "email": "kevinllabot5@gmail.com",
+ "password": "Jajaja123"
+
+}
+
+### Listar alumnos
+GET {{url}}/api/alumnos
+Authorization: Bearer {{token}}
+
+### Crear alumno
+POST {{url}}/api/alumnos
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+
+ "nombre": "Luis",
+ "apellido": "Martinez",
+ "dni": "398765432"
+
+}
+
+### Crear materia
+POST {{url}}/api/materias
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+ "nombre": "Matematicas II",
+ "codigo": "MAT202",
+ "año": 2
+}
+
+### Agregar notas
+POST {{url}}/api/notas
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+ "alumno_id": 1,
+ "materia_id": 3,
+ "nota1": 8,
+ "nota2": 9,
+ "nota3": 9
+}
+
+### Promedios
+GET {{url}}/api/notas/promedios
+Authorization: Bearer {{token}}
 
 
 
