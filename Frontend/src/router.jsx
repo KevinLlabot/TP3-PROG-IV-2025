@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from './App.jsx';
-import Login from './pages/Login.jsx';
-import Register from './pages/Register.jsx';
-import Alumnos from './pages/Alumnos.jsx';
-import Materias from './pages/Materias.jsx';
-import Notas from './pages/Notas.jsx';
+import Login from './paginas/Login.jsx';
+import Register from './paginas/Register.jsx';
+import Alumnos from './paginas/Alumnos.jsx';
+import Materias from './paginas/Materias.jsx';
+import Notas from './paginas/Notas.jsx';
 import ProtectedRoute from './Auth/protectedRoute.jsx';
 
 export const router = createBrowserRouter([
