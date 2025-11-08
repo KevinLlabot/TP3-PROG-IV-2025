@@ -1,0 +1,564 @@
+button {
+  background-color: #2ecc71;        
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-family: "Segoe UI", Arial, sans-serif;
+  letter-spacing: 0.5px;
+  transition: all 0.25s ease;
+  box-shadow: 0 0 6px rgba(46, 204, 113, 0.3);
+}
+
+button:hover {
+  background-color: #27ae60;        
+  box-shadow: 0 0 10px rgba(46, 204, 113, 0.6);
+  transform: scale(1.05);
+}
+
+button:active {
+  transform: scale(0.97);
+  background-color: #1e8449;
+}
+
+button:disabled {
+  background-color: #b8eac7;
+  cursor: not-allowed;
+}
+
+nav a {
+  color: #dfffe7;                /* verde muy claro, legible sobre fondo */
+  font-weight: 600;
+  text-decoration: none;
+  font-family: "Segoe UI", Arial, sans-serif;
+  letter-spacing: 0.5px;
+  position: relative;
+  padding: 4px 8px;
+  transition: color 0.3s ease;
+}
+
+/* Línea animada debajo del link */
+nav a::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background-color: #2ecc71;
+  transition: width 0.3s ease;
+}
+
+/* Hover effect */
+nav a:hover {
+  color: #2ecc71;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* Espaciado entre los links */
+nav {
+  display: flex;
+  justify-content: center;
+  gap: 28px;
+  margin-top: 8px;
+}
+
+
+
+
+
+/* ======== TÍTULOS ======== */
+h1, h2, h3, h4 {
+  color: #2ecc71; /* Verde esmeralda */
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-weight: 700;
+  margin-bottom: 10px;
+  text-shadow: 0 0 8px rgba(46, 204, 113, 0.3);
+  transition: all 0.3s ease;
+}
+
+/* Efecto suave al pasar el mouse */
+h1:hover, h2:hover, h3:hover {
+  transform: scale(1.02);
+  text-shadow: 0 0 12px rgba(46, 204, 113, 0.6);
+}
+
+/* ======== SUBTÍTULOS ======== */
+h4, h5 {
+  color: #1abc9c;
+  font-weight: 600;
+}
+
+/* ======== SELECTS ======== */
+select {
+  background-color: #e9fff0;
+  border: 2px solid #2ecc71;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 15px;
+  color: #145a32;
+  font-weight: 600;
+  font-family: "Segoe UI", Arial, sans-serif;
+  transition: all 0.25s ease;
+  box-shadow: 0 0 4px rgba(46, 204, 113, 0.3);
+}
+
+/* Al pasar el mouse */
+select:hover {
+  background-color: #d0f8e2;
+  box-shadow: 0 0 8px rgba(46, 204, 113, 0.5);
+  transform: scale(1.03);
+}
+
+/* Cuando está enfocado */
+select:focus {
+  outline: none;
+  border-color: #27ae60;
+  box-shadow: 0 0 10px rgba(39, 174, 96, 0.6);
+}
+
+
+
+
+
+/* ======== ESTILO PARA EL SALUDO ======== */
+.user-greeting {
+  font-family: "Segoe UI", Arial, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #dfffe7; /* verde claro sobre fondo oscuro */
+  background: linear-gradient(90deg, #2ecc71 0%, #1abc9c 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 0.5px;
+  margin-right: 10px;
+  transition: all 0.3s ease;
+}
+
+/* efecto suave al pasar el mouse */
+.user-greeting:hover {
+  text-shadow: 0 0 10px rgba(46, 204, 113, 0.6);
+  transform: scale(1.03);
+}
+
+
+/* === TITULOS GENERALES === */
+
+/* Principal (por ejemplo: Gestión Académica) */
+h2 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #00ff9d;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+  border-bottom: 3px solid #00ff9d;
+  display: inline-block;
+  padding-bottom: 6px;
+  text-align: center;
+  animation: fadeInTitle 0.4s ease-in-out;
+}
+
+/* Secundario (por ejemplo: Iniciar sesión, Alumnos, Materias, etc.) */
+h3 {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* espacio exacto entre línea y texto */
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: #00e693;
+  margin: 25px 0 15px 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+  letter-spacing: 0.5px;
+  animation: fadeInTitle 0.4s ease-in-out;
+}
+
+/* Línea verde pegada al texto */
+h3::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 1.5em; /* iguala la altura del texto */
+  background-color: #00e693;
+  border-radius: 2px;
+}
+
+/* Subtítulos (por ejemplo: Agregar nuevo, Listado, etc.) */
+h4 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #d8fff0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+  padding-bottom: 4px;
+  margin-bottom: 10px;
+  animation: fadeInTitle 0.4s ease-in-out;
+}
+
+/* Animación de entrada suave */
+@keyframes fadeInTitle {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === CONTENEDOR LOGIN === */
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; 
+  gap: 25px;
+  text-align: center;
+}
+
+/* === TITULO === */
+.login-container h3 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #00e693;
+  margin: 0;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.login-container h3::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 1.5em;
+  background-color: #00e693;
+  border-radius: 2px;
+}
+
+/* === FORMULARIO === */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 30px 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Inputs */
+.login-form input
+
+/* ======== TABLA ESTILO ESMERALDA ======== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  border: 2px solid #000;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  border: 1px solid #000;
+  padding: 10px 14px;
+  text-align: center;
+  color: #e8fcef;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+th {
+  background: linear-gradient(180deg, #2ecc71, #27ae60);
+  color: #fff;
+  font-size: 1.1rem;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 3px 0 #000;
+}
+
+tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+tr:hover {
+  background-color: rgba(46, 204, 113, 0.25);
+  transition: background 0.3s ease;
+}
+
+/* ======== BOTONES ======== */
+button {
+  background: #2ecc71;
+  color: #fff;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 14px;
+  cursor: pointer;
+  margin: 5px; /* ✅ separación entre botones */
+  transition: all 0.25s ease;
+  box-shadow: 0 3px 0 #000;
+}
+
+button:hover {
+  background: #27ae60;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 0 #000;
+}
+
+button:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #000;
+}
+
+/* Botón eliminar más fuerte */
+button.delete {
+  background: #e74c3c;
+}
+
+button.delete:hover {
+  background: #c0392b;
+}
+
+
+/* === MODAL === */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content {
+  background: linear-gradient(145deg, #1b6b5e, #218b74);
+  color: #fff;
+  padding: 25px;
+  border-radius: 15px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  animation: slideDown 0.3s ease-in-out;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.modal-header h3 {
+  margin: 0;
+  color: #00ff9d;
+  text-shadow: 1px 1px 3px #000;
+}
+
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Botón cerrar */
+.cerrar {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.cerrar:hover {
+  transform: scale(1.2);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+
+
+
+
+
+/* Centrado vertical */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  flex-direction: column;
+  text-align: center;
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Formulario */
+.login-form {
+  background: rgba(0, 0, 0, 0.15);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  min-width: 350px;
+  backdrop-filter: blur(4px);
+}
+
+.login-form h3 {
+  color: #00ff9d;
+  margin-bottom: 10px;
+  border-left: 6px solid #00ff9d;
+  padding-left: 12px;
+}
+
+/* Inputs */
+.login-form input {
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  outline: none;
+}
+
+/* Botón */
+.login-form button {
+  background-color: #1dd86f;
+  border: none;
+  color: white;
+  padding: 14px 0;              
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 0 #000;
+  transition: all 0.2s ease;
+  width: 100%;                  
+  font-size: 1.1rem;            
+  letter-spacing: 0.5px;        
+}
+.login-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 0 #000;
+}
+
+/* Error */
+.error {
+  color: crimson;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* Bienvenida */
+.bienvenida {
+  text-align: center;
+  color: #00ff9d;
+  font-size: 2rem;
+  font-weight: 700;
+  text-shadow: 0 0 10px #00ff9d, 0 0 20px #00ff9d;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+
+
+
+
+
+/* === Enlaces Login / Registro === */
+.auth-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;                    /* separación entre Login y Registro */
+  margin-top: 15px;
+}
+
+.auth-links a {
+  color: #00ff9d;               /* verde esmeralda */
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  position: relative;
+  transition: all 0.25s ease;
+  text-shadow: 0 0 8px rgba(0, 255, 157, 0.3);
+}
+
+/* subrayado animado */
+.auth-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 2px;
+  background: #00ff9d;
+  transition: width 0.3s ease;
+}
+
+.auth-links a:hover::after {
+  width: 100%;
+}
+
+.auth-links a:hover {
+  color: #7affc8;               /* tono más claro al pasar el mouse */
+  text-shadow: 0 0 10px #00ff9d;
+}
+
+
+
+
+
+
+
+
+

@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 import { apiFetch } from '../api.js';
 import { useAuth } from '../auth/AuthContext.jsx';
-import MateriaForm from '../components/MateriaForm.jsx';
+import MateriaForm from '../componentes/MateriaForm.jsx';
+import Modal from '../componentes/Modal.jsx';
 
 export default function Materias() {
   const { token } = useAuth();
-  const [items, setItems] = useState([]);
+  const [materias, setMaterias] = useState([]);
   const [editing, setEditing] = useState(null);
   const [err, setErr] = useState('');
 
-  //Cargar todas las materias
   const load = async () => {
     try {
       const data = await apiFetch('/materias', { token });
-      setItems(data.data);
+      setMaterias(data.data);
     } catch (e) {
       setErr(e.message);
     }
@@ -23,7 +23,6 @@ export default function Materias() {
     load();
   }, []);
 
-  //Crear neuva materia
   const create = async (payload) => {
     try {
       await apiFetch('/materias', { method: 'POST', token, body: payload });
@@ -33,14 +32,9 @@ export default function Materias() {
     }
   };
 
-  //Actualizar materia
   const update = async (id, payload) => {
     try {
-      await apiFetch(`/materias/${id}`, {
-        method: 'PUT',
-        token,
-        body: payload,
-      });
+      await apiFetch(`/materias/${id}`, { method: 'PUT', token, body: payload });
       setEditing(null);
       load();
     } catch (e) {
@@ -48,7 +42,6 @@ export default function Materias() {
     }
   };
 
-  //Eliminar materia
   const del = async (id) => {
     if (!confirm('¿Eliminar materia?')) return;
     try {
@@ -59,23 +52,21 @@ export default function Materias() {
     }
   };
 
-
   return (
     <div>
       <h3>Materias</h3>
       {err && <small style={{ color: 'crimson' }}>{err}</small>}
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-        
-        {/* --- Formulario Nueva Materia --- */}
+        {/* --- Formulario nuevo --- */}
         <div>
-          <h4>Nueva</h4>
+          <h4>Agregar Nueva Materia</h4>
           <MateriaForm onSubmit={create} />
         </div>
 
-        {/* --- Listado de Materias --- */}
+        {/* --- Tabla de materias --- */}
         <div>
-          <h4>Listado</h4>
+          <h4>Listado de Materias</h4>
           <table width="100%" border="1" cellPadding="6">
             <thead>
               <tr>
@@ -87,34 +78,39 @@ export default function Materias() {
               </tr>
             </thead>
             <tbody>
-              {items.map((m) => (
+              {materias.map((m) => (
                 <tr key={m.id}>
                   <td>{m.id}</td>
                   <td>{m.nombre}</td>
                   <td>{m.codigo}</td>
                   <td>{m.año}</td>
                   <td>
-                    <button onClick={() => setEditing(m)}>Editar</button>
-                    <button onClick={() => del(m.id)}>Eliminar</button>
+                    <div className="acciones">
+                      <button className="editar" onClick={() => setEditing(m)}>
+                        Editar
+                      </button>
+                      <button className="eliminar" onClick={() => del(m.id)}>
+                        Eliminar
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-
-          {/* --- Formulario de Edicion --- */}
-          {editing && (
-            <div style={{ marginTop: 8 }}>
-              <h4>Editar</h4>
-              <MateriaForm
-                initial={editing}
-                onSubmit={(p) => update(editing.id, p)}
-                onCancel={() => setEditing(null)}
-              />
-            </div>
-          )}
         </div>
       </div>
+
+      {/* === Modal de edición === */}
+      {editing && (
+        <Modal title="Editar Materia" onClose={() => setEditing(null)}>
+          <MateriaForm
+            initial={editing}
+            onSubmit={(p) => update(editing.id, p)}
+            onCancel={() => setEditing(null)}
+          />
+        </Modal>
+      )}
     </div>
   );
 }

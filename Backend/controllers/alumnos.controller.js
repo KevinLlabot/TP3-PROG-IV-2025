@@ -1,91 +1,111 @@
-import { pool } from '../db.js';
+import { db } from "../db.js";  
 
+//Listar todos los alumnos
 export const listAlumnos = async (req, res, next) => {
-
-try {
-
-const [rows] = await pool.query('SELECT * FROM alumno ORDER BY id DESC');
-
-res.json({ success: true, data: rows });
-
-} catch (e) { next(e); }
+  try {
+    const [rows] = await db.query("SELECT * FROM alumno ORDER BY id DESC");
+    res.json({ success: true, data: rows });
+  } catch (e) {
+    next(e);
+  }
 };
 
+//Obtener un alumno por ID
 export const getAlumno = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const [rows] = await db.query("SELECT * FROM alumno WHERE id = ?", [id]);
 
-try {
+    if (!rows.length)
+      return res
+        .status(404)
+        .json({ success: false, error: "Alumno no encontrado" });
 
-const { id } = req.params;
-const [rows] = await pool.query('SELECT * FROM alumno WHERE id = ?',
-[id]);
-
-if (!rows.length) return res.status(404).json({ success: false, error:
-'Alumno no encontrado' });
-
-res.json({ success: true, data: rows[0] });
-
-} catch (e) { next(e); }
+    res.json({ success: true, data: rows[0] });
+  } catch (e) {
+    next(e);
+  }
 };
 
+//Crear un nuevo alumno
 export const createAlumno = async (req, res, next) => {
+  try {
+    const { nombre, apellido, dni } = req.body;
 
-try {
+    // Verificar si ya existe el DNI
+    const [existing] = await db.query("SELECT id FROM alumno WHERE dni = ?", [
+      dni,
+    ]);
 
-const { nombre, apellido, dni } = req.body;
-const [existing] = await pool.query('SELECT id FROM alumno WHERE dni=?', [dni]);
+    if (existing.length)
+      return res
+        .status(409)
+        .json({ success: false, error: "DNI duplicado" });
 
-if (existing.length) return res.status(409).json({ success: false,
-error: 'DNI duplicado' });
+    //Insertar nuevo alumno
+    const [result] = await db.query(
+      "INSERT INTO alumno (nombre, apellido, dni) VALUES (?, ?, ?)",
+      [nombre, apellido, dni]
+    );
 
-const [result] = await pool.query(
-'INSERT INTO alumno (nombre, apellido, dni) VALUES (?, ?, ?)',
-[nombre, apellido, dni]
-);
-
-res.status(201).json({ success: true, data: { id: result.insertId,
-nombre, apellido, dni } });
-
-} catch (e) { next(e); }
+    res.status(201).json({
+      success: true,
+      data: { id: result.insertId, nombre, apellido, dni },
+    });
+  } catch (e) {
+    next(e);
+  }
 };
 
+//Actualizar datos de un alumno
 export const updateAlumno = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { nombre, apellido, dni } = req.body;
 
-try {
+    // Evitar duplicado de DNI en otros alumnos
+    const [dup] = await db.query(
+      "SELECT id FROM alumno WHERE dni = ? AND id <> ?",
+      [dni, id]
+    );
 
-const { id } = req.params;
-const { nombre, apellido, dni } = req.body;
+    if (dup.length)
+      return res
+        .status(409)
+        .json({ success: false, error: "DNI ya usado por otro alumno" });
 
-// evitar colisión de DNI con otros
-const [dup] = await pool.query('SELECT id FROM alumno WHERE dni = ? AND id <> ?', [dni, id]);
+    const [result] = await db.query(
+      "UPDATE alumno SET nombre=?, apellido=?, dni=? WHERE id=?",
+      [nombre, apellido, dni, id]
+    );
 
-if (dup.length) return res.status(409).json({ success: false, error:
-'DNI ya usado por otro alumno' });
+    if (!result.affectedRows)
+      return res
+        .status(404)
+        .json({ success: false, error: "Alumno no encontrado" });
 
-const [result] = await pool.query(
-'UPDATE alumno SET nombre=?, apellido=?, dni=? WHERE id=?',
-[nombre, apellido, dni, id]
-);
-
-if (!result.affectedRows) return res.status(404).json({ success: false,
-error: 'Alumno no encontrado' });
-
-res.json({ success: true });
-
-} catch (e) { next(e); }
+    res.json({ success: true });
+  } catch (e) {
+    next(e);
+  }
 };
 
+//Eliminar un alumno
 export const deleteAlumno = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const [result] = await db.query("DELETE FROM alumno WHERE id = ?", [id]);
 
-try {
+    if (!result.affectedRows)
+      return res
+        .status(404)
+        .json({ success: false, error: "Alumno no encontrado" });
 
-const { id } = req.params;
-const [result] = await pool.query('DELETE FROM alumno WHERE id=?', [id]);
-
-if (!result.affectedRows) return res.status(404).json({ success: false,
-error: 'Alumno no encontrado' });
-res.status(204).send();
-
-} catch (e) { next(e); }
+    res.status(204).send();
+  } catch (e) {
+    next(e);
+  }
 };
+
 
 

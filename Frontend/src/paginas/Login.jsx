@@ -1,49 +1,61 @@
-import { useState } from 'react';
-import { apiFetch } from '../api.js';
-import { useAuth } from '../auth/AuthContext.jsx';
+import { useState } from "react";
+import { useAuth } from "../auth/AuthContext.jsx";
 
-export default function Login(){
+export default function Login() {
+  const { login, user } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [mensaje, setMensaje] = useState("");
+  const [error, setError] = useState("");
 
-const { login } = useAuth();
-const [email, setEmail] = useState('');
-const [password, setPassword] = useState('');
-const [error, setError] = useState(''); 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
 
-const handleSubmit = async (e) => {
+    try {
+      // 🔹 Simula una respuesta del backend
+      const fakeUser = { nombre: "Kevin", email };
+      const fakeToken = "123abc";
 
-e.preventDefault(); 
-setError('');
+      // guarda los datos de sesión en el contexto
+      login({ user: fakeUser, token: fakeToken });
 
-if (!email.match(/^[^@\s]+@[^@\s]+\.[^@\s]+$/)) return setError('Email inválido');
+      // muestra mensaje de bienvenida
+      setMensaje(`✨ Bienvenido, ${fakeUser.nombre}`);
+    } catch (err) {
+      console.error(err);
+      setError("Credenciales inválidas o error en el servidor");
+    }
+  };
 
-if (password.length < 8) return setError('Min 8 caracteres');
-
-try {
-
-const data = await apiFetch('/auth/login', { method: 'POST',  body: {email, password } });
-
-login({ user: data.user, token: data.token });
-
-} catch (e) { setError(e.message); }
-
-};
-
-return (
-<form onSubmit={handleSubmit} style={{ display:'grid', gap:8, maxWidth:360 }}>
-<h3>Iniciar sesión</h3>
-
-<input value={email} onChange={e=>setEmail(e.target.value)}
-placeholder="Email" required />
-
-<input type="password" value={password}
-onChange={e=>setPassword(e.target.value)} placeholder="Contraseña" required />
-
-{error && <small style={{color:'crimson'}}>{error}</small>}
-
-<button>Entrar</button>
-
-</form>
-);
+  return (
+    <div className="login-container">
+      {(!user && !mensaje) ? (
+        <form className="login-form" onSubmit={handleSubmit}>
+          <h3>Iniciar sesión</h3>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="Contraseña"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button type="submit">Entrar</button>
+          {error && <p className="error">{error}</p>}
+        </form>
+      ) : (
+        <div className="bienvenida fade-in">
+          <h2>{mensaje || `✨ Bienvenido, ${user?.nombre || "Usuario"}`}</h2>
+        </div>
+      )}
+    </div>
+  );
 }
-
 

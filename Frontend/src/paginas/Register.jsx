@@ -21,7 +21,7 @@ if (password.length < 8) return setErr('Min 8 caracteres');
 
 try {
 
-await apiFetch('/auth/register', { method: 'POST', body: { nombre, email, password } });
+await apiFetch('/auth/registro', { method: 'POST', body: { nombre, email, password } });
 
 setMsg('Usuario creado. Ahora podés iniciar sesión.'); 
 setNombre(''); 
