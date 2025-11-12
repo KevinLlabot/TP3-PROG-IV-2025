@@ -97,7 +97,7 @@ export default function App() {
               <nav className="auth-links" style={{ display: 'flex', gap: 10 }}>
                 {enLogin ? (
                   <>
-                    <Link to="/register">Registro</Link>
+                    <Link to="/register">Registrarse</Link>
                     <button
                       onClick={() => navigate('/')}
                       style={{
@@ -131,7 +131,7 @@ export default function App() {
                   </>
                 ) : (
                   <>
-                    <Link to="/login">Login</Link> | <Link to="/register">Registro</Link>
+                    <Link to="/login">Login</Link> | <Link to="/register">Registrarse</Link>
                   </>
                 )}
               </nav>
