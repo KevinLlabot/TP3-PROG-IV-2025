@@ -3,12 +3,14 @@ import { apiFetch } from '../api.js';
 import { useAuth } from '../auth/AuthContext.jsx';
 import MateriaForm from '../componentes/MateriaForm.jsx';
 import Modal from '../componentes/Modal.jsx';
+import './Toast.css'
 
 export default function Materias() {
   const { token } = useAuth();
   const [materias, setMaterias] = useState([]);
   const [editing, setEditing] = useState(null);
   const [err, setErr] = useState('');
+  const [msg, setMsg] = useState('');
 
   const load = async () => {
     try {
@@ -23,10 +25,16 @@ export default function Materias() {
     load();
   }, []);
 
+  const showMessage = (text) => {
+    setMsg(text);
+    setTimeout(() => setMsg(''), 3000);
+  };
+
   const create = async (payload) => {
     try {
       await apiFetch('/materias', { method: 'POST', token, body: payload });
       load();
+      showMessage('✅ Materia agregada correctamente');
     } catch (e) {
       setErr(e.message);
     }
@@ -37,6 +45,7 @@ export default function Materias() {
       await apiFetch(`/materias/${id}`, { method: 'PUT', token, body: payload });
       setEditing(null);
       load();
+      showMessage('✅ Materia actualizada');
     } catch (e) {
       setErr(e.message);
     }
@@ -47,6 +56,7 @@ export default function Materias() {
     try {
       await apiFetch(`/materias/${id}`, { method: 'DELETE', token });
       load();
+      showMessage('🗑️ Materia eliminada');
     } catch (e) {
       setErr(e.message);
     }
@@ -57,8 +67,13 @@ export default function Materias() {
       <h3>Materias</h3>
       {err && <small style={{ color: 'crimson' }}>{err}</small>}
 
+      {msg && (
+        <div className="toast-popup">
+          <p>{msg}</p>
+        </div>
+      )}
+
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-        
         <div>
           <h4>Agregar Nueva Materia</h4>
           <MateriaForm onSubmit={create} />
@@ -85,12 +100,8 @@ export default function Materias() {
                   <td>{m.año}</td>
                   <td>
                     <div className="acciones">
-                      <button className="editar" onClick={() => setEditing(m)}>
-                        Editar
-                      </button>
-                      <button className="eliminar" onClick={() => del(m.id)}>
-                        Eliminar
-                      </button>
+                      <button className="editar" onClick={() => setEditing(m)}>Editar</button>
+                      <button className="eliminar" onClick={() => del(m.id)}>Eliminar</button>
                     </div>
                   </td>
                 </tr>
@@ -112,5 +123,3 @@ export default function Materias() {
     </div>
   );
 }
-
-

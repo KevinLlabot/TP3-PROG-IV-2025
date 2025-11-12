@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { apiFetch } from '../api.js';
 import { useAuth } from '../auth/AuthContext.jsx';
 import NotaForm from '../componentes/NotaForm.jsx';
+import './Toast.css'; // 👈 Importamos el estilo del mensaje emergente
 
 export default function Notas() {
   const { token } = useAuth();
@@ -12,6 +13,7 @@ export default function Notas() {
   const [detalle, setDetalle] = useState(null);
   const [promedios, setPromedios] = useState([]);
   const [err, setErr] = useState('');
+  const [msg, setMsg] = useState(''); // 👈 Mensaje emergente (toast)
 
   // Cargar alumnos y materias
   const loadBase = async () => {
@@ -27,7 +29,7 @@ export default function Notas() {
     }
   };
 
-  // Cargar promedios y notas
+  // Cargar promedios
   const loadPromedios = async () => {
     try {
       const d = await apiFetch('/notas/promedios', { token });
@@ -58,6 +60,12 @@ export default function Notas() {
     loadDetalle();
   }, [selAlumno, selMateria]);
 
+  // Mostrar mensaje animado
+  const showMessage = (text) => {
+    setMsg(text);
+    setTimeout(() => setMsg(''), 3000);
+  };
+
   // Guardar o actualizar notas
   const handleNotas = async (notas) => {
     try {
@@ -71,6 +79,7 @@ export default function Notas() {
         },
       });
       await Promise.all([loadDetalle(), loadPromedios()]);
+      showMessage('✅ Notas guardadas correctamente');
     } catch (e) {
       setErr(e.message);
     }
@@ -104,6 +113,13 @@ export default function Notas() {
       </h3>
 
       {err && <small style={{ color: 'crimson' }}>{err}</small>}
+
+      {/* 🔹 Ventana emergente (toast) */}
+      {msg && (
+        <div className="toast-popup">
+          <p>{msg}</p>
+        </div>
+      )}
 
       {/* --- Selección de alumno y materia --- */}
       <div style={{ display: 'flex', gap: 10, marginBottom: 20 }}>
@@ -218,5 +234,3 @@ export default function Notas() {
     </div>
   );
 }
-
-

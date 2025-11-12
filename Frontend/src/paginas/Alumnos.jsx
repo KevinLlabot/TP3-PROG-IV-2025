@@ -2,13 +2,15 @@ import { useEffect, useState } from 'react';
 import { apiFetch } from '../api.js';
 import { useAuth } from '../auth/AuthContext.jsx';
 import AlumnoForm from '../componentes/Alumnoform.jsx';
-import Modal from '../componentes/Modal.jsx'; 
+import Modal from '../componentes/Modal.jsx';
+import './Toast.css'; 
 
 export default function Alumnos() {
   const { token } = useAuth();
   const [items, setItems] = useState([]);
   const [editing, setEditing] = useState(null);
   const [err, setErr] = useState('');
+  const [msg, setMsg] = useState(''); 
 
   const load = async () => {
     try {
@@ -23,10 +25,16 @@ export default function Alumnos() {
     load();
   }, []);
 
+  const showMessage = (text) => {
+    setMsg(text);
+    setTimeout(() => setMsg(''), 3000);
+  };
+
   const create = async (payload) => {
     try {
       await apiFetch('/alumnos', { method: 'POST', token, body: payload });
       load();
+      showMessage('✅ Alumno agregado con éxito');
     } catch (e) {
       setErr(e.message);
     }
@@ -37,6 +45,7 @@ export default function Alumnos() {
       await apiFetch(`/alumnos/${id}`, { method: 'PUT', token, body: payload });
       setEditing(null);
       load();
+      showMessage('✅ Alumno actualizado correctamente');
     } catch (e) {
       setErr(e.message);
     }
@@ -47,6 +56,7 @@ export default function Alumnos() {
     try {
       await apiFetch(`/alumnos/${id}`, { method: 'DELETE', token });
       load();
+      showMessage('🗑️ Alumno eliminado');
     } catch (e) {
       setErr(e.message);
     }
@@ -57,8 +67,14 @@ export default function Alumnos() {
       <h3>Alumnos</h3>
       {err && <small style={{ color: 'crimson' }}>{err}</small>}
 
+      
+      {msg && (
+        <div className="toast-popup">
+          <p>{msg}</p>
+        </div>
+      )}
+
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-        
         <div>
           <h4>Agregar Nuevo Alumno</h4>
           <AlumnoForm onSubmit={create} />
@@ -85,12 +101,8 @@ export default function Alumnos() {
                   <td>{a.dni}</td>
                   <td>
                     <div className="acciones">
-                      <button className="editar" onClick={() => setEditing(a)}>
-                        Editar
-                      </button>
-                      <button className="eliminar" onClick={() => del(a.id)}>
-                        Eliminar
-                      </button>
+                      <button className="editar" onClick={() => setEditing(a)}>Editar</button>
+                      <button className="eliminar" onClick={() => del(a.id)}>Eliminar</button>
                     </div>
                   </td>
                 </tr>
