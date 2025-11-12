@@ -27,7 +27,7 @@ export default function Notas() {
     }
   };
 
-  // Cargar promedios 
+  // Cargar promedios y notas
   const loadPromedios = async () => {
     try {
       const d = await apiFetch('/notas/promedios', { token });
@@ -37,14 +37,14 @@ export default function Notas() {
     }
   };
 
-  // Cargar detalle de notas de un alumno en una materia
+  // Cargar detalle de notas
   const loadDetalle = async () => {
     setDetalle(null);
     if (!selAlumno || !selMateria) return;
     try {
       const d = await apiFetch(`/notas/${selAlumno}/${selMateria}`, { token });
       setDetalle(d.data);
-    } catch (e) {
+    } catch {
       setDetalle(null);
     }
   };
@@ -162,7 +162,7 @@ export default function Notas() {
         </div>
       )}
 
-      {/* --- Promedios generales --- */}
+      {/* --- Tabla de promedios --- */}
       <h4
         style={{
           color: '#00ff9d',
@@ -183,12 +183,16 @@ export default function Notas() {
           backgroundColor: 'rgba(0, 0, 0, 0.15)',
           borderRadius: 10,
           overflow: 'hidden',
+          textAlign: 'center',
         }}
       >
         <thead>
           <tr style={{ backgroundColor: 'rgba(0, 255, 157, 0.2)' }}>
             <th style={{ padding: 10, borderBottom: '1px solid #00ff9d' }}>Alumno</th>
             <th style={{ padding: 10, borderBottom: '1px solid #00ff9d' }}>Materia</th>
+            <th style={{ padding: 10, borderBottom: '1px solid #00ff9d' }}>Nota 1</th>
+            <th style={{ padding: 10, borderBottom: '1px solid #00ff9d' }}>Nota 2</th>
+            <th style={{ padding: 10, borderBottom: '1px solid #00ff9d' }}>Nota 3</th>
             <th style={{ padding: 10, borderBottom: '1px solid #00ff9d' }}>Promedio</th>
           </tr>
         </thead>
@@ -201,8 +205,11 @@ export default function Notas() {
               <td style={{ padding: 8, borderBottom: '1px solid #005f4d' }}>
                 {p.materia_nombre}
               </td>
-              <td style={{ padding: 8, borderBottom: '1px solid #005f4d' }}>
-                {p.promedio ?? '—'}
+              <td>{p.nota1 ?? '—'}</td>
+              <td>{p.nota2 ?? '—'}</td>
+              <td>{p.nota3 ?? '—'}</td>
+              <td>
+                <strong>{p.promedio ?? '—'}</strong>
               </td>
             </tr>
           ))}

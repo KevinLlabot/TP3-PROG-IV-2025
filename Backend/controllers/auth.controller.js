@@ -14,11 +14,11 @@ export const register = async (req, res, next) => {
         .status(409)
         .json({ success: false, error: "Email ya registrado" });
 
-    //Encriptar contraseña
+    //Hashear la contraseña
     const rounds = Number(process.env.BCRYPT_ROUNDS) || 10;
     const hash = await bcrypt.hash(password, rounds);
 
-    //Insertar nuevo usuario
+    //Agregar nuevo usuario
     const [result] = await db.query(
       "INSERT INTO usuario (nombre, email, password) VALUES (?, ?, ?)",
       [nombre, email, hash]

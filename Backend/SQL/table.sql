@@ -5,7 +5,7 @@ CREATE TABLE `alumno` (
   `dni` varchar(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `dni_UNIQUE` (`dni`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `materia` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -14,7 +14,7 @@ CREATE TABLE `materia` (
   `año` tinyint NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `codigo_UNIQUE` (`codigo`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `nota` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -24,12 +24,12 @@ CREATE TABLE `nota` (
   `nota2` decimal(4,2) DEFAULT NULL,
   `nota3` decimal(4,2) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uq_alumno_materia` (`alumno_id`),
+  UNIQUE KEY `uq_alumno_materia` (`alumno_id`,`materia_id`),
   KEY `fk_nota_materia` (`materia_id`),
   KEY `fk_nota_alumno` (`alumno_id`),
   CONSTRAINT `fk_nota_alumno` FOREIGN KEY (`alumno_id`) REFERENCES `alumno` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_nota_materia` FOREIGN KEY (`materia_id`) REFERENCES `materia` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 CREATE TABLE `usuario` (
   `id` int NOT NULL AUTO_INCREMENT,
@@ -38,4 +38,4 @@ CREATE TABLE `usuario` (
   `password` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_UNIQUE` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

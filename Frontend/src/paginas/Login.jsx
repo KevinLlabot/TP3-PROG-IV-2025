@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useAuth } from "../auth/AuthContext.jsx";
+import { apiFetch } from "../api.js"; 
 
 export default function Login() {
   const { login, user } = useAuth();
@@ -13,18 +14,25 @@ export default function Login() {
     setError("");
 
     try {
-      // 🔹 Simula una respuesta del backend
-      const fakeUser = { nombre: "Kevin", email };
-      const fakeToken = "123abc";
+      //Petición al backend
+      const data = await apiFetch("/auth/login", {
+        method: "POST",
+        body: { email, password },
+      });
+      
+      
+      if (!data.success || !data.token || !data.user) {
+        throw new Error(data.error || "Error al iniciar sesión");
+      }
 
-      // guarda los datos de sesión en el contexto
-      login({ user: fakeUser, token: fakeToken });
+      
+      login({ user: data.user, token: data.token });
 
-      // muestra mensaje de bienvenida
-      setMensaje(`✨ Bienvenido, ${fakeUser.nombre}`);
+      
+      setMensaje(`🎓 Bienvenido, ${data.user.nombre}`);
     } catch (err) {
       console.error(err);
-      setError("Credenciales inválidas o error en el servidor");
+      setError("Usuario o contraseña incorrectos o error en el servidor");
     }
   };
 
@@ -52,10 +60,12 @@ export default function Login() {
         </form>
       ) : (
         <div className="bienvenida fade-in">
-          <h2>{mensaje || `✨ Bienvenido, ${user?.nombre || "Usuario"}`}</h2>
+          <h2>{mensaje}</h2>
         </div>
       )}
     </div>
   );
 }
+
+
 

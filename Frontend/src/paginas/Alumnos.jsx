@@ -58,13 +58,12 @@ export default function Alumnos() {
       {err && <small style={{ color: 'crimson' }}>{err}</small>}
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-        {/* --- Formulario nuevo --- */}
+        
         <div>
           <h4>Agregar Nuevo Alumno</h4>
           <AlumnoForm onSubmit={create} />
         </div>
 
-        {/* --- Listado de alumnos --- */}
         <div>
           <h4>Listado de Alumnos Registrados</h4>
           <table width="100%" border="1" cellPadding="6">
@@ -101,7 +100,6 @@ export default function Alumnos() {
         </div>
       </div>
 
-      {/* === Modal para edición === */}
       {editing && (
         <Modal title="Editar Alumno" onClose={() => setEditing(null)}>
           <AlumnoForm

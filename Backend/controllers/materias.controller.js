@@ -29,7 +29,7 @@ export const createMateria = async (req, res, next) => {
   try {
     const { nombre, codigo, año } = req.body;
 
-    // Verificar si el código ya existe
+    // Verificar si el código de la materia ya existe
     const [dup] = await db.query("SELECT id FROM materia WHERE codigo = ?", [
       codigo,
     ]);
@@ -39,7 +39,7 @@ export const createMateria = async (req, res, next) => {
         .status(409)
         .json({ success: false, error: "Código duplicado" });
 
-    // Insertar nueva materia
+    // Agrega nueva materia
     const [result] = await db.query(
       "INSERT INTO materia (nombre, codigo, año) VALUES (?, ?, ?)",
       [nombre, codigo, año]
@@ -69,7 +69,7 @@ export const updateMateria = async (req, res, next) => {
         .status(409)
         .json({ success: false, error: "Código ya usado por otra materia" });
 
-    // Actualizar materia
+    // Editar materia
     const [result] = await db.query(
       "UPDATE materia SET nombre=?, codigo=?, año=? WHERE id=?",
       [nombre, codigo, año, id]

@@ -29,7 +29,7 @@ button:disabled {
 }
 
 nav a {
-  color: #dfffe7;                /* verde muy claro, legible sobre fondo */
+  color: #dfffe7;                
   font-weight: 600;
   text-decoration: none;
   font-family: "Segoe UI", Arial, sans-serif;
@@ -39,7 +39,7 @@ nav a {
   transition: color 0.3s ease;
 }
 
-/* Línea animada debajo del link */
+
 nav a::after {
   content: "";
   position: absolute;
@@ -51,7 +51,7 @@ nav a::after {
   transition: width 0.3s ease;
 }
 
-/* Hover effect */
+
 nav a:hover {
   color: #2ecc71;
 }
@@ -60,7 +60,7 @@ nav a:hover::after {
   width: 100%;
 }
 
-/* Espaciado entre los links */
+
 nav {
   display: flex;
   justify-content: center;
@@ -69,12 +69,10 @@ nav {
 }
 
 
-
-
-
 /* ======== TÍTULOS ======== */
+
 h1, h2, h3, h4 {
-  color: #2ecc71; /* Verde esmeralda */
+  color: #2ecc71; 
   font-family: "Segoe UI", Arial, sans-serif;
   font-weight: 700;
   margin-bottom: 10px;
@@ -82,19 +80,22 @@ h1, h2, h3, h4 {
   transition: all 0.3s ease;
 }
 
-/* Efecto suave al pasar el mouse */
+
 h1:hover, h2:hover, h3:hover {
   transform: scale(1.02);
   text-shadow: 0 0 12px rgba(46, 204, 113, 0.6);
 }
 
-/* ======== SUBTÍTULOS ======== */
+
 h4, h5 {
   color: #1abc9c;
   font-weight: 600;
 }
 
+/* --------------------------------------------------------------------------- */
+
 /* ======== SELECTS ======== */
+
 select {
   background-color: #e9fff0;
   border: 2px solid #2ecc71;
@@ -108,14 +109,14 @@ select {
   box-shadow: 0 0 4px rgba(46, 204, 113, 0.3);
 }
 
-/* Al pasar el mouse */
+
 select:hover {
   background-color: #d0f8e2;
   box-shadow: 0 0 8px rgba(46, 204, 113, 0.5);
   transform: scale(1.03);
 }
 
-/* Cuando está enfocado */
+
 select:focus {
   outline: none;
   border-color: #27ae60;
@@ -123,15 +124,15 @@ select:focus {
 }
 
 
-
-
+/* --------------------------------------------------------------------------- */
 
 /* ======== ESTILO PARA EL SALUDO ======== */
+
 .user-greeting {
   font-family: "Segoe UI", Arial, sans-serif;
   font-size: 1.3rem;
   font-weight: 600;
-  color: #dfffe7; /* verde claro sobre fondo oscuro */
+  color: #dfffe7; 
   background: linear-gradient(90deg, #2ecc71 0%, #1abc9c 100%);
   background-clip: text;
   -webkit-background-clip: text;
@@ -141,16 +142,16 @@ select:focus {
   transition: all 0.3s ease;
 }
 
-/* efecto suave al pasar el mouse */
+
 .user-greeting:hover {
   text-shadow: 0 0 10px rgba(46, 204, 113, 0.6);
   transform: scale(1.03);
 }
 
+/* --------------------------------------------------------------------------- */
 
 /* === TITULOS GENERALES === */
 
-/* Principal (por ejemplo: Gestión Académica) */
 h2 {
   font-size: 2.2rem;
   font-weight: 800;
@@ -165,11 +166,11 @@ h2 {
   animation: fadeInTitle 0.4s ease-in-out;
 }
 
-/* Secundario (por ejemplo: Iniciar sesión, Alumnos, Materias, etc.) */
+
 h3 {
   display: flex;
   align-items: center;
-  gap: 8px; /* espacio exacto entre línea y texto */
+  gap: 8px; 
   font-size: 1.9rem;
   font-weight: 700;
   color: #00e693;
@@ -179,17 +180,17 @@ h3 {
   animation: fadeInTitle 0.4s ease-in-out;
 }
 
-/* Línea verde pegada al texto */
+
 h3::before {
   content: '';
   display: inline-block;
   width: 6px;
-  height: 1.5em; /* iguala la altura del texto */
+  height: 1.5em; 
   background-color: #00e693;
   border-radius: 2px;
 }
 
-/* Subtítulos (por ejemplo: Agregar nuevo, Listado, etc.) */
+
 h4 {
   font-size: 1.4rem;
   font-weight: 600;
@@ -201,7 +202,6 @@ h4 {
   animation: fadeInTitle 0.4s ease-in-out;
 }
 
-/* Animación de entrada suave */
 @keyframes fadeInTitle {
   from {
     opacity: 0;
@@ -213,7 +213,10 @@ h4 {
   }
 }
 
+/* --------------------------------------------------------------------------- */
+
 /* === CONTENEDOR LOGIN === */
+
 .login-container {
   display: flex;
   flex-direction: column;
@@ -224,7 +227,6 @@ h4 {
   text-align: center;
 }
 
-/* === TITULO === */
 .login-container h3 {
   display: flex;
   align-items: center;
@@ -246,7 +248,10 @@ h4 {
   border-radius: 2px;
 }
 
+/* --------------------------------------------------------------------------- */
+
 /* === FORMULARIO === */
+
 .login-form {
   display: flex;
   flex-direction: column;
@@ -258,10 +263,12 @@ h4 {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
-/* Inputs */
 .login-form input
 
+/* --------------------------------------------------------------------------- */
+
 /* ======== TABLA ESTILO ESMERALDA ======== */
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -297,7 +304,10 @@ tr:hover {
   transition: background 0.3s ease;
 }
 
+/* --------------------------------------------------------------------------- */
+
 /* ======== BOTONES ======== */
+
 button {
   background: #2ecc71;
   color: #fff;
@@ -306,7 +316,7 @@ button {
   border-radius: 8px;
   padding: 8px 14px;
   cursor: pointer;
-  margin: 5px; /* ✅ separación entre botones */
+  margin: 5px; 
   transition: all 0.25s ease;
   box-shadow: 0 3px 0 #000;
 }
@@ -322,7 +332,7 @@ button:active {
   box-shadow: 0 1px 0 #000;
 }
 
-/* Botón eliminar más fuerte */
+
 button.delete {
   background: #e74c3c;
 }
@@ -331,8 +341,10 @@ button.delete:hover {
   background: #c0392b;
 }
 
+/* --------------------------------------------------------------------------- */
 
 /* === MODAL === */
+
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -377,7 +389,7 @@ button.delete:hover {
   gap: 10px;
 }
 
-/* Botón cerrar */
+
 .cerrar {
   background: transparent;
   border: none;
@@ -391,7 +403,7 @@ button.delete:hover {
   transform: scale(1.2);
 }
 
-/* Animaciones */
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -412,12 +424,8 @@ button.delete:hover {
   }
 }
 
+/* --------------------------------------------------------------------------- */
 
-
-
-
-
-/* Centrado vertical */
 .login-container {
   display: flex;
   justify-content: center;
@@ -428,7 +436,7 @@ button.delete:hover {
   animation: fadeIn 0.6s ease-in-out;
 }
 
-/* Formulario */
+
 .login-form {
   background: rgba(0, 0, 0, 0.15);
   padding: 30px;
@@ -448,7 +456,7 @@ button.delete:hover {
   padding-left: 12px;
 }
 
-/* Inputs */
+
 .login-form input {
   padding: 10px;
   border: none;
@@ -457,7 +465,7 @@ button.delete:hover {
   outline: none;
 }
 
-/* Botón */
+
 .login-form button {
   background-color: #1dd86f;
   border: none;
@@ -477,14 +485,12 @@ button.delete:hover {
   box-shadow: 0 6px 0 #000;
 }
 
-/* Error */
 .error {
   color: crimson;
   font-weight: 600;
   text-align: center;
 }
 
-/* Bienvenida */
 .bienvenida {
   text-align: center;
   color: #00ff9d;
@@ -493,7 +499,6 @@ button.delete:hover {
   text-shadow: 0 0 10px #00ff9d, 0 0 20px #00ff9d;
 }
 
-/* Animaciones */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -509,22 +514,18 @@ button.delete:hover {
   animation: fadeIn 1s ease-in-out;
 }
 
-
-
-
-
-
 /* === Enlaces Login / Registro === */
+
 .auth-links {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 25px;                    /* separación entre Login y Registro */
+  gap: 1px;                    
   margin-top: 15px;
 }
 
 .auth-links a {
-  color: #00ff9d;               /* verde esmeralda */
+  color: #00ff9d;               
   text-decoration: none;
   font-weight: 600;
   font-size: 1.1rem;
@@ -533,7 +534,7 @@ button.delete:hover {
   text-shadow: 0 0 8px rgba(0, 255, 157, 0.3);
 }
 
-/* subrayado animado */
+
 .auth-links a::after {
   content: "";
   position: absolute;
@@ -550,7 +551,7 @@ button.delete:hover {
 }
 
 .auth-links a:hover {
-  color: #7affc8;               /* tono más claro al pasar el mouse */
+  color: #7affc8;               
   text-shadow: 0 0 10px #00ff9d;
 }
 

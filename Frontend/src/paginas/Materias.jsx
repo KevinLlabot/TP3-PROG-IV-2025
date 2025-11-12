@@ -58,13 +58,12 @@ export default function Materias() {
       {err && <small style={{ color: 'crimson' }}>{err}</small>}
 
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-        {/* --- Formulario nuevo --- */}
+        
         <div>
           <h4>Agregar Nueva Materia</h4>
           <MateriaForm onSubmit={create} />
         </div>
 
-        {/* --- Tabla de materias --- */}
         <div>
           <h4>Listado de Materias</h4>
           <table width="100%" border="1" cellPadding="6">
@@ -101,7 +100,6 @@ export default function Materias() {
         </div>
       </div>
 
-      {/* === Modal de edición === */}
       {editing && (
         <Modal title="Editar Materia" onClose={() => setEditing(null)}>
           <MateriaForm

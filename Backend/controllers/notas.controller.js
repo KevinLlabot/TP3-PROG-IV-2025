@@ -1,6 +1,6 @@
 import { db } from "../db.js";  
 
-//Inserta o actualiza las notas según si ya existen o no
+//Agrega o edita las notas si ya existen
 export async function upsertNotas(req, res) {
   try {
     const { alumno_id, materia_id, nota1, nota2, nota3 } = req.body;
@@ -12,7 +12,6 @@ export async function upsertNotas(req, res) {
       });
     }
 
-    // Limpia valores vacíos (para que se guarden como NULL)
     const clean = (v) => (v === "" ? null : v);
 
     await db.query(
@@ -38,13 +37,13 @@ export async function upsertNotas(req, res) {
   }
 }
 
-// Obtiene las notas de un alumno y materia
+//Obtiene las notas de un alumno en una materia específica
 export const getNotasByAlumnoMateria = async (req, res, next) => {
   try {
     const { alumno_id, materia_id } = req.params;
 
     const [rows] = await db.query(
-      "SELECT * FROM nota WHERE alumno_id=? AND materia_id=?",
+      "SELECT * FROM nota WHERE alumno_id = ? AND materia_id = ?",
       [alumno_id, materia_id]
     );
 
@@ -60,7 +59,7 @@ export const getNotasByAlumnoMateria = async (req, res, next) => {
   }
 };
 
-// Calcula los promedios generales
+//Calcula los promedios generales e incluye las notas
 export const getPromedios = async (req, res, next) => {
   try {
     const [rows] = await db.query(`
@@ -70,15 +69,21 @@ export const getPromedios = async (req, res, next) => {
         a.apellido AS alumno_apellido,
         n.materia_id,
         m.nombre AS materia_nombre,
+        n.nota1,
+        n.nota2,
+        n.nota3,
         ROUND(
-          (COALESCE(n.nota1,0) + COALESCE(n.nota2,0) + COALESCE(n.nota3,0)) /
+          (COALESCE(n.nota1, 0) + COALESCE(n.nota2, 0) + COALESCE(n.nota3, 0)) /
           NULLIF(
-            ((n.nota1 IS NOT NULL) + (n.nota2 IS NOT NULL) + (n.nota3 IS NOT NULL)),
-          0),
-        2) AS promedio
+            ( (n.nota1 IS NOT NULL) + (n.nota2 IS NOT NULL) + (n.nota3 IS NOT NULL) ),
+            0
+          ),
+          2
+        ) AS promedio
       FROM nota n
       JOIN alumno a ON a.id = n.alumno_id
       JOIN materia m ON m.id = n.materia_id
+      ORDER BY a.apellido ASC, m.nombre ASC
     `);
 
     res.json({ success: true, data: rows });

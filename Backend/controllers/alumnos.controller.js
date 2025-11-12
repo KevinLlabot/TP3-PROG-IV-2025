@@ -42,7 +42,7 @@ export const createAlumno = async (req, res, next) => {
         .status(409)
         .json({ success: false, error: "DNI duplicado" });
 
-    //Insertar nuevo alumno
+    //Agregar nuevo alumno
     const [result] = await db.query(
       "INSERT INTO alumno (nombre, apellido, dni) VALUES (?, ?, ?)",
       [nombre, apellido, dni]
@@ -57,7 +57,7 @@ export const createAlumno = async (req, res, next) => {
   }
 };
 
-//Actualizar datos de un alumno
+//Editar alumno
 export const updateAlumno = async (req, res, next) => {
   try {
     const { id } = req.params;
