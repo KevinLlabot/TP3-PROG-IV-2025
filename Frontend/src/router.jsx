@@ -5,7 +5,7 @@ import Register from './paginas/Register.jsx';
 import Alumnos from './paginas/Alumnos.jsx';
 import Materias from './paginas/Materias.jsx';
 import Notas from './paginas/Notas.jsx';
-import ProtectedRoute from './Auth/protectedRoute.jsx';
+import ProtectedRoute from './auth/protectedRoute.jsx';
 
 export const router = createBrowserRouter([
     { path: '/', element: <App />,

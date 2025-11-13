@@ -1,5 +1,5 @@
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
-import { useAuth } from './auth/AuthContext.jsx';
+import { useAuth } from './auth/authContext.jsx';
 import './App.css';
 
 export default function App() {
@@ -51,7 +51,6 @@ export default function App() {
             </nav>
           )}
 
-          {/* 🔹 Zona superior derecha */}
           <div
             style={{
               position: 'fixed',
@@ -139,7 +138,6 @@ export default function App() {
           </div>
         </header>
 
-        {/* 🔸 Texto de bienvenida */}
         {mostrarBienvenida && (
           <div className="texto-bienvenida">
             <p>

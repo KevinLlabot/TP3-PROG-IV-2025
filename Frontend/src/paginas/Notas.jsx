@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { apiFetch } from '../api.js';
-import { useAuth } from '../auth/AuthContext.jsx';
+import { useAuth } from '../auth/authContext.jsx';
 import NotaForm from '../componentes/NotaForm.jsx';
-import './Toast.css'; // 👈 Importamos el estilo del mensaje emergente
+import './Toast.css'; 
 
 export default function Notas() {
   const { token } = useAuth();
@@ -13,7 +13,7 @@ export default function Notas() {
   const [detalle, setDetalle] = useState(null);
   const [promedios, setPromedios] = useState([]);
   const [err, setErr] = useState('');
-  const [msg, setMsg] = useState(''); // 👈 Mensaje emergente (toast)
+  const [msg, setMsg] = useState(''); 
 
   // Cargar alumnos y materias
   const loadBase = async () => {

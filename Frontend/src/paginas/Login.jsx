@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useAuth } from "../auth/AuthContext.jsx";
+import { useAuth } from "../auth/authContext.jsx";
 import { apiFetch } from "../api.js"; 
 
 export default function Login() {

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { apiFetch } from '../api.js';
-import { useAuth } from '../auth/AuthContext.jsx';
+import { useAuth } from '../auth/authContext.jsx';
 import AlumnoForm from '../componentes/Alumnoform.jsx';
 import Modal from '../componentes/Modal.jsx';
 import './Toast.css'; 
