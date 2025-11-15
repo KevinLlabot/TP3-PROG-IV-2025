@@ -1,6 +1,6 @@
 import { db } from "../db.js";  
 
-//Listar todos los alumnos
+//Mostrar todos los alumnos
 export const listAlumnos = async (req, res, next) => {
   try {
     const [rows] = await db.query("SELECT * FROM alumno ORDER BY id DESC");

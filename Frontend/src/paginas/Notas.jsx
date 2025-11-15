@@ -114,14 +114,12 @@ export default function Notas() {
 
       {err && <small style={{ color: 'crimson' }}>{err}</small>}
 
-      {/* 🔹 Ventana emergente (toast) */}
       {msg && (
         <div className="toast-popup">
           <p>{msg}</p>
         </div>
       )}
 
-      {/* --- Selección de alumno y materia --- */}
       <div style={{ display: 'flex', gap: 10, marginBottom: 20 }}>
         <select
           value={selAlumno}
@@ -164,7 +162,6 @@ export default function Notas() {
         </select>
       </div>
 
-      {/* --- Formulario de notas --- */}
       {selAlumno && selMateria && (
         <div
           style={{
@@ -178,7 +175,6 @@ export default function Notas() {
         </div>
       )}
 
-      {/* --- Tabla de promedios --- */}
       <h4
         style={{
           color: '#00ff9d',

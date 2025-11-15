@@ -5,6 +5,7 @@ import { register, login } from '../controllers/auth.controller.js';
 
 const router = Router();
 
+//ruta para el registro de usuarios nuevos
 router.post('/registro',
 body('nombre').trim().isLength({ min: 2 }).withMessage('Nombre requerido'),
 body('email').isEmail().withMessage('Email inválido'),
@@ -13,6 +14,7 @@ validate,
 register
 );
 
+//ruta para el login de usuarios
 router.post('/login',
 body('email').isEmail(),
 body('password').notEmpty(),

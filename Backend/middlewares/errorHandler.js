@@ -1,3 +1,4 @@
+//middleware para manejar errores en las rutas
 export function errorHandler(err, req, res, next)  {
 
 console.error('[ERROR]', err);

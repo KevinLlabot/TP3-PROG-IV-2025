@@ -7,8 +7,13 @@ deleteMateria } from '../controllers/materias.controller.js';
 
 const router = Router();
 
+// Rutas para gestionar materias
 router.get('/', authRequired, listMaterias);
+
+// Obtener una materia por ID
 router.get('/:id', authRequired, param('id').isInt(), validate, getMateria);
+
+// Crear una nueva materia
 router.post('/',
 authRequired,
 body('nombre').trim().notEmpty(),
@@ -18,7 +23,7 @@ validate,
 createMateria
 );
 
-
+// Editar una materia existente
 router.put('/:id',
 authRequired,
 param('id').isInt(),
@@ -29,7 +34,7 @@ validate,
 updateMateria
 );
 
-
+// Eliminar una materia
 router.delete('/:id', authRequired, param('id').isInt(), validate,
 deleteMateria);
 

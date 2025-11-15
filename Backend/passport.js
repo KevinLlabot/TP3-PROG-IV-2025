@@ -2,7 +2,7 @@ import passport from 'passport';
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
 
 
-
+// configuracion de passport para JWT
 export const configurePassport = () => {
 
 const opts = {

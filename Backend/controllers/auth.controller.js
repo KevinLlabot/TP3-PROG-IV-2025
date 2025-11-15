@@ -67,7 +67,6 @@ export const login = async (req, res, next) => {
         expiresIn: process.env.JWT_EXPIRES || "4h",
       }
     );
-
     
     res.json({
       success: true,

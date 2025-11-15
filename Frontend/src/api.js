@@ -1,5 +1,6 @@
 const API_URL = 'http://localhost:3000/api';
 
+// Función para realizar llamadas a la API
 export const apiFetch = async (path, { method = 'GET', body, token } = {}) => {
     
 const headers = { 'Content-Type': 'application/json' };

@@ -1,5 +1,6 @@
 import { db } from "../db.js";
 
+// mostrar todas las materias
 export const listMaterias = async (req, res, next) => {
   try {
     const [rows] = await db.query("SELECT * FROM materia ORDER BY id DESC");
@@ -9,6 +10,7 @@ export const listMaterias = async (req, res, next) => {
   }
 };
 
+// mostrar una materia por id
 export const getMateria = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -25,6 +27,7 @@ export const getMateria = async (req, res, next) => {
   }
 };
 
+// crear una nueva materia
 export const createMateria = async (req, res, next) => {
   try {
     const { nombre, codigo, año } = req.body;

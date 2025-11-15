@@ -7,6 +7,7 @@ from '../controllers/notas.controller.js';
 
 const router = Router();
 
+// Rutas para gestionar notas
 router.post('/',
 authRequired,
 body('alumno_id').isInt(),
@@ -18,8 +19,10 @@ validate,
 upsertNotas
 );
 
+// Obtener promedios de notas por materia
 router.get('/promedios', authRequired, getPromedios);
 
+// Obtener notas de un alumno en una materia específica
 router.get('/:alumno_id/:materia_id',
 authRequired,
 param('alumno_id').isInt(),
